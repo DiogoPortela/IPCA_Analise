@@ -78,4 +78,9 @@ public class OutcomeManager : MonoBehaviour {
     {
         return sequencias[s].NumerosDaSequencia[n];
     }
+
+    public int IncrementoAImprimir(int s)
+    {
+        return sequencias[s].Incremento;
+    }
 }
