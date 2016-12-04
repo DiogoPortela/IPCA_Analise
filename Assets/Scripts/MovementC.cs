@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MovementC : MonoBehaviour {
     Rigidbody2D thisRigidbody;
-    //Transform child;
+    SpriteRenderer thisSpriteRenderer;
     MeshRenderer thisRender;
     float horizontal, jump;
     public int jumpForce, movementLimit, speed;
@@ -12,6 +12,7 @@ public class MovementC : MonoBehaviour {
 
 	void Start () {
         thisRigidbody = GetComponent<Rigidbody2D>();
+        thisSpriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 	
@@ -34,6 +35,15 @@ public class MovementC : MonoBehaviour {
                 thisRigidbody.AddForce(movement);
             }
         }
+        if(thisRigidbody.velocity.x < 0)
+        {
+            thisSpriteRenderer.flipX = true;
+        }
+        if (thisRigidbody.velocity.x > 0)
+        {
+            thisSpriteRenderer.flipX = false;
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
