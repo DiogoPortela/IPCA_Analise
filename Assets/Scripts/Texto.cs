@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Texto : MonoBehaviour {
     public Text Wintotal;
@@ -33,7 +34,10 @@ public class Texto : MonoBehaviour {
             Wintotal.text = "\n\n“A cada Dragão o Seu Heroi, a Cada Heroi a sua aventura, e esta é a tua...”";
             Botao.text = "Começar Aventura";
         }
-
+        if (progresse == 5)
+        {
+            SceneManager.LoadScene("Teste1");
+        }
         if (Input.GetMouseButtonDown(0))
         {
             progresse++;
