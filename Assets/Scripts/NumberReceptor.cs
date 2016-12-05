@@ -3,7 +3,7 @@ using System.Collections;
 
 public class NumberReceptor : MonoBehaviour {
 
-    public int sequence, number;
+    public int sequence, number, thisNumber;
     public bool isOn = false;
     GameObject manager;
     TextMesh texto;
@@ -16,7 +16,8 @@ public class NumberReceptor : MonoBehaviour {
         render.enabled = isOn;
         manager = GameObject.FindGameObjectWithTag("Manager");
         a = manager.GetComponent<OutcomeManager>();
-        texto.text = a.NumeroAImprimir(sequence-1, number-1).ToString();
+        thisNumber = a.NumeroAImprimir(sequence - 1, number - 1);
+        texto.text = thisNumber.ToString();
     }
 
 }

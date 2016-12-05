@@ -10,6 +10,6 @@ public class IncrementoReceptor : MonoBehaviour {
 	void Start () {
         a = GameObject.FindGameObjectWithTag("Manager").GetComponent<OutcomeManager>();
         thisTextMesh = GetComponent<TextMesh>();
-        thisTextMesh.text = "+" + a.IncrementoAImprimir(IncrementoNo-1);
+        thisTextMesh.text = a.IncrementoAImprimir(IncrementoNo - 1).ToString();
 	}
 }
