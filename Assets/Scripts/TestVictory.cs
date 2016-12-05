@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TestVictory : MonoBehaviour {
     NumeroMagico oNumero;
@@ -18,6 +19,7 @@ public class TestVictory : MonoBehaviour {
         {
             if (oNumero.valorMagico == thisNumberReceptor.thisNumber)
             {
+                SceneManager.LoadScene("Teste2");
                 Debug.Log("YOU WON");
             }
         }

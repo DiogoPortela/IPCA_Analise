@@ -31,7 +31,7 @@ public class Texto : MonoBehaviour {
         }
         if (progresse == 4)
         {
-            Wintotal.text = "\n\n“A cada Dragão o Seu Heroi, a Cada Heroi a sua aventura, e esta é a tua...”";
+            Wintotal.text = "“A cada Dragão o Seu Heroi, a Cada Heroi a sua aventura, e esta é a tua...”";
             Botao.text = "Começar Aventura";
         }
         if (progresse == 5)
