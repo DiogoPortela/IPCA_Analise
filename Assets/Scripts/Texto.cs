@@ -36,7 +36,7 @@ public class Texto : MonoBehaviour {
         }
         if (progresse == 5)
         {
-            SceneManager.LoadScene("Teste1");
+            SceneManager.LoadScene("Level1");
         }
         if (Input.GetMouseButtonDown(0))
         {

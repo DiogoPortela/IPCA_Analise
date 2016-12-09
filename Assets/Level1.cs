@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Level1 : MonoBehaviour {
     public int valor11;
@@ -61,9 +62,9 @@ public class Level1 : MonoBehaviour {
         //Colisão player para Ganhar
         if (other.gameObject.tag == "Testar")
         {
-            if(EscolheSimbolo==1 && v11Por12 == v21Por22) { Debug.Log("Win1"); }
-            else if (EscolheSimbolo == 0 && v11Por12 > v21Por22) { Debug.Log("Win2"); }
-            else if (EscolheSimbolo == 2 && v11Por12 < v21Por22) { Debug.Log("Win3"); }
+            if(EscolheSimbolo==1 && v11Por12 == v21Por22) {SceneManager.LoadScene("Level2") ; }
+            else if (EscolheSimbolo == 0 && v11Por12 > v21Por22) { SceneManager.LoadScene("Level2"); }
+            else if (EscolheSimbolo == 2 && v11Por12 < v21Por22) { SceneManager.LoadScene("Level2"); }
             else Debug.Log("LOSE");
         }
     }

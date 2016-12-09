@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class TestVictory : MonoBehaviour {
     NumeroMagico oNumero;
     NumberReceptor thisNumberReceptor;
+    public string nextLevel;
 
 	void Start ()
     {
@@ -19,7 +20,7 @@ public class TestVictory : MonoBehaviour {
         {
             if (oNumero.valorMagico == thisNumberReceptor.thisNumber)
             {
-                SceneManager.LoadScene("Teste2");
+                SceneManager.LoadScene(nextLevel);
                 Debug.Log("YOU WON");
             }
         }
