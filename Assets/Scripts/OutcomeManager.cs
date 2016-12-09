@@ -49,6 +49,7 @@ public class OutcomeManager : MonoBehaviour {
 
 	void Awake () {
         sequencias = new Sequencia[numeroDeSequencias];
+        Random.InitState((int)Time.time);
 
         for(int i = 0; i < numeroDeSequencias; i++)
         {
