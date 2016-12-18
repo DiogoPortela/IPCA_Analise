@@ -10,6 +10,9 @@ public class Level1 : MonoBehaviour {
     public int valor21;
     public int valor22;
     public int EscolheSimbolo;
+    public int padraoJogo; //Escolhe como será apresentada a fracao
+    public int insidepadrao; //escolhe qual a fracao que sera maior
+    public int multi; //valor fixo que multiplica
     public Text vstring11;
     public Text vstring12;
     public Text vstring21;
@@ -19,11 +22,46 @@ public class Level1 : MonoBehaviour {
     public double v21Por22;
 
     void Start () {
-        //Gerar numeros aliatórios
-        valor11 = Random.Range(1, 9);
-        valor12 = Random.Range(1, 9);
-        valor21 = Random.Range(1, 9);
-        valor22 = Random.Range(1, 9);
+
+        Random.InitState(System.DateTime.Now.Millisecond); 
+        padraoJogo = Random.Range(1, 4);
+        insidepadrao = Random.Range(1, 2);
+        if (padraoJogo == 1)
+        {
+            valor11 = Random.Range(1, 9);
+            valor12 = Random.Range(1, 9);
+            valor21 = valor11;
+            valor22 = Random.Range(1, 9);
+
+        }
+        else if(padraoJogo == 2)
+        {
+            valor11 = Random.Range(1, 9);
+            valor12 = Random.Range(1, 9);
+            valor21 = Random.Range(1, 9);
+            valor22 = valor12;
+
+        }
+        else
+        {
+            if (insidepadrao == 1)
+            {
+                multi = Random.Range(1, 5);
+                valor11 = Random.Range(1, 9);
+                valor12 = Random.Range(1, 9);
+                valor21 = multi*valor11;
+                valor22 = multi*valor12;
+            }
+            else
+            {
+                multi = Random.Range(1, 5);
+                valor21 = Random.Range(1, 9);
+                valor22 = Random.Range(1, 9);
+                valor11 = multi * valor21;
+                valor12 = multi * valor22;               
+            }
+         }
+   
 
         //Passar esses numeros para o UI
         vstring11.text = valor11.ToString();

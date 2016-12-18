@@ -22,9 +22,9 @@ public class ValueSorter : MonoBehaviour {
         if(other.gameObject.tag == "SOMEFUCKINGRANDOMTAG" && contadorDeBaixo < 5)
         {
             a = other.GetComponent<ValueMover>();
-            a.posicaoDestino = posicoesDeChegada[contadorDeBaixo];
-            posicoesDePartida[contadorDeBaixo] = a.thisTransform.position;
-            a.startMoving = true;
+            //a.posicaoDestino = posicoesDeChegada[contadorDeBaixo];
+            //posicoesDePartida[contadorDeBaixo] = a.thisTransform.position;
+            //a.startMoving = true;
             contadorDeBaixo++;
         }
         if(other.gameObject.tag == "RESETER")
