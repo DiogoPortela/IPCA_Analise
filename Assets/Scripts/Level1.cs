@@ -93,12 +93,20 @@ public class Level1 : MonoBehaviour {
     //Colisão player para trocar
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Trocar")
+        if (other.gameObject.tag == "Maior")
         {
-            EscolheSimbolo = EscolheSimbolo + 1;
+            EscolheSimbolo = 2;
+        }
+        else if (other.gameObject.tag == "Igual")
+        {
+            EscolheSimbolo = 1;
+        }
+       else if (other.gameObject.tag == "Menor")
+        {
+            EscolheSimbolo = 0;
         }
         //Colisão player para Ganhar
-        if (other.gameObject.tag == "Testar")
+        if (other.gameObject.tag == "Maior"|| other.gameObject.tag == "Igual"|| other.gameObject.tag == "Menor")
         {
             if(EscolheSimbolo==1 && v11Por12 == v21Por22) {SceneManager.LoadScene("Level2") ; }
             else if (EscolheSimbolo == 0 && v11Por12 > v21Por22) { SceneManager.LoadScene("Level2"); }

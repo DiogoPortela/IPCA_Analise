@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class Level5function : MonoBehaviour {
     public int DMilhares;
@@ -12,12 +12,13 @@ public class Level5function : MonoBehaviour {
     public int Finalnumber;
     public int RandomCerta;
 
-    public Text Resposta1;
-    public Text Resposta2;
-    public Text Resposta3;
-    public Text Resposta4;
+    public GameObject Resposta1;
+    public GameObject Resposta2;
+    public GameObject Resposta3;
+    public GameObject Resposta4;
 
-    public Text Questao;
+    //public GameObject Resposta1;
+    public GameObject Questao;
     string SDMilhares;
     string SMilhares;
     string SCentenas;
@@ -36,30 +37,31 @@ public class Level5function : MonoBehaviour {
         //atribui a certa
         RandomCerta = Random.Range(1, 5);
         if(RandomCerta == 1) { 
-            Resposta1.text = Finalnumber.ToString();
-            Resposta2.text = Random.Range(10000, 99999).ToString();
-            Resposta3.text = Random.Range(10000, 99999).ToString();
-            Resposta4.text = Random.Range(10000, 99999).ToString();
+            //Resposta1.text = Finalnumber.ToString();
+            Resposta1.GetComponent<TextMesh>().text = Finalnumber.ToString();
+            Resposta2.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
+            Resposta3.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
+            Resposta4.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
         }
         else if(RandomCerta == 2) {
-            Resposta1.text = Random.Range(10000, 99999).ToString();
-            Resposta2.text = Finalnumber.ToString();
-            Resposta3.text = Random.Range(10000, 99999).ToString();
-            Resposta4.text = Random.Range(10000, 99999).ToString();
+            Resposta1.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
+            Resposta2.GetComponent<TextMesh>().text = Finalnumber.ToString();
+            Resposta3.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
+            Resposta4.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
         }
         else if (RandomCerta == 3)
         {
-            Resposta1.text = Random.Range(10000, 99999).ToString();
-            Resposta2.text = Random.Range(10000, 99999).ToString();
-            Resposta3.text = Finalnumber.ToString();
-            Resposta4.text = Random.Range(10000, 99999).ToString();
+            Resposta1.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
+            Resposta2.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
+            Resposta3.GetComponent<TextMesh>().text = Finalnumber.ToString();
+            Resposta4.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
         }
         else
         {
-            Resposta1.text = Random.Range(10000, 99999).ToString();
-            Resposta2.text = Random.Range(10000, 99999).ToString();
-            Resposta3.text = Random.Range(10000, 99999).ToString();
-            Resposta4.text = Finalnumber.ToString();
+            Resposta1.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
+            Resposta2.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
+            Resposta3.GetComponent<TextMesh>().text = Random.Range(10000, 99999).ToString();
+            Resposta4.GetComponent<TextMesh>().text = Finalnumber.ToString();
         }
 
         switch (DMilhares)
@@ -222,7 +224,7 @@ public class Level5function : MonoBehaviour {
                 break;
         }
 
-        Questao.text = SDMilhares+SMilhares+SCentenas+SDezenas+SUnidades;
+        Questao.GetComponent<TextMesh>().text = SDMilhares+SMilhares+SCentenas+SDezenas+SUnidades;
     }
 	
 	// Update is called once per frame
