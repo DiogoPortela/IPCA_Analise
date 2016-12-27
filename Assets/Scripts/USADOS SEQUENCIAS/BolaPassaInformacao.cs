@@ -22,5 +22,13 @@ public class BolaPassaInformacao : MonoBehaviour {
         {
             
         }
+
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Equals("Pickup Target") && Input.GetKeyDown(KeyCode.E))
+        {
+            collision.GetComponentInParent<PlayerMovement>().receberObjecto(this.gameObject);
+        }
     }
 }
