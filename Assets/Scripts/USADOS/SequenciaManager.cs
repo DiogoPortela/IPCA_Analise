@@ -4,18 +4,12 @@ using System.Collections;
 public class Sequencia
 {
     private int[] numerosDaSequencia;
-    private int primeiroValor;
     private int incremento;
 
     public int[] NumerosDaSequencia
     {
         get { return numerosDaSequencia; }
         set { numerosDaSequencia = value; }
-    }
-    public int PrimeiroValor
-    {
-        get { return primeiroValor; }
-        set { primeiroValor = value; }
     }
     public int Incremento
     {
@@ -24,19 +18,18 @@ public class Sequencia
     }
 
 
-    public Sequencia(int n, int numero, int incremento)
+    public Sequencia(int n, int incremento)
     {
         this.numerosDaSequencia = new int[n];
-        this.primeiroValor = numero;
         this.incremento = incremento;
     }
 
 
 }
 
-public class OutcomeManager : MonoBehaviour {
+public class SequenciaManager : MonoBehaviour {
 
-    int teste;
+    //int teste;
 
     public int[] numerosInicias;
     public int[] incrementos;
@@ -58,14 +51,14 @@ public class OutcomeManager : MonoBehaviour {
 
             for (int o = 0; o < i; o++)
             {
-                if (primeiro == sequencias[o].PrimeiroValor && incremento == sequencias[o].Incremento)
+                if (primeiro == sequencias[o].NumerosDaSequencia[0] && incremento == sequencias[o].Incremento)
                 {
                     primeiro = numerosInicias[Random.Range(0, numerosInicias.Length)];
                      incremento = incrementos[Random.Range(0, incrementos.Length)];
                 }
             }
 
-            sequencias[i] = new Sequencia(numeroDeNumerosDasSequencias, primeiro, incremento);
+            sequencias[i] = new Sequencia(numeroDeNumerosDasSequencias, incremento);
             Debug.Log("Sequencia: " + i + " Primeiro: " + primeiro + " Incremento: " + incremento);
             for (int n = 0; n < numeroDeNumerosDasSequencias; n ++)
             {

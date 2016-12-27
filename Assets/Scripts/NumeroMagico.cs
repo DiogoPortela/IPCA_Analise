@@ -5,11 +5,11 @@ using UnityEngine;
 public class NumeroMagico : MonoBehaviour {
     public int valorAleatorio, valorMagico;
     TextMesh thisTextMesh;
-    OutcomeManager a;
+    SequenciaManager a;
 
     void Start()
     {
-        a = GameObject.FindGameObjectWithTag("Manager").GetComponent<OutcomeManager>();
+        a = GameObject.FindGameObjectWithTag("Manager").GetComponent<SequenciaManager>();
         thisTextMesh = GetComponent<TextMesh>();
         valorAleatorio = Random.Range(0, a.numeroDeSequencias);
         valorMagico = a.NumeroAImprimir(valorAleatorio, a.numeroDeNumerosDasSequencias - 1);

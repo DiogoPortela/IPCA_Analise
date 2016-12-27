@@ -8,14 +8,14 @@ public class NumberReceptor : MonoBehaviour {
     GameObject manager;
     TextMesh texto;
     MeshRenderer render;
-    OutcomeManager a;
+    SequenciaManager a;
 
     void Start () {
         texto = GetComponent<TextMesh>();
         render = GetComponent<MeshRenderer>();
         render.enabled = isOn;
         manager = GameObject.FindGameObjectWithTag("Manager");
-        a = manager.GetComponent<OutcomeManager>();
+        a = manager.GetComponent<SequenciaManager>();
         thisNumber = a.NumeroAImprimir(sequence - 1, number - 1);
         texto.text = thisNumber.ToString();
     }

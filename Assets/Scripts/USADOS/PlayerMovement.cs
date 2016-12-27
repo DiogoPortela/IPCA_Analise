@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MovementC : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour {
     Rigidbody2D thisRigidbody;
     SpriteRenderer thisSpriteRenderer;
     MeshRenderer thisRender;
@@ -35,11 +35,11 @@ public class MovementC : MonoBehaviour {
                 thisRigidbody.AddForce(movement);
             }
         }
-        if(thisRigidbody.velocity.x < 0)
+        if(thisRigidbody.velocity.x < 0 && horizontal < 0)
         {
             thisSpriteRenderer.flipX = true;
         }
-        if (thisRigidbody.velocity.x > 0)
+        if (thisRigidbody.velocity.x > 0 && horizontal > 0)
         {
             thisSpriteRenderer.flipX = false;
         }
