@@ -8,10 +8,11 @@ public class VitoriaManager : MonoBehaviour
     public GameObject valorSequencia1, valorSequencia2, valorSequencia3, valorSequencia4, valorSequencia5;
     public GameObject bolaPrefab, spawnPoint1, spawnPoint2, bolasParent;
     public int numeroDeBolas = 6;
+    public Color laranjaTexto, azulTexto;
 
     SequenciaManager SM;
     Sequencia randomSequencia, sequenciaPosta;
-    bool largarNumeros = true;
+    bool largarNumeros = true, stopBlink = false;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class VitoriaManager : MonoBehaviour
         if(largarNumeros)
         {
             largarNumeros = false;
+            StartCoroutine(Blink(valorSequencia1));
             StartCoroutine(SpawnBalls());
             
         }
@@ -63,6 +65,19 @@ public class VitoriaManager : MonoBehaviour
                 Debug.Log("spawned on 2");
             }
             yield return new WaitForSecondsRealtime(1f);
+        }
+    }
+    IEnumerator Blink(GameObject texto)
+    {
+        while(true)
+        {
+            Debug.Log("TESTE");
+            texto.GetComponent<TextMesh>().color = laranjaTexto;
+            yield return new WaitForSecondsRealtime(0.5f);
+            texto.GetComponent<TextMesh>().color = azulTexto;
+            yield return new WaitForSecondsRealtime(0.5f);
+            if (stopBlink)
+                break;
         }
     }
 }
