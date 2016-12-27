@@ -48,13 +48,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         if(isCarring)
         {
-            objectoCarregado.transform.position = pickupTarget.transform.position;
-            objectoCarregado.GetComponent<CircleCollider2D>().enabled = false;
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                isCarring = false;
-                objectoCarregado.GetComponent<CircleCollider2D>().enabled = true;
-            }
+            StartCoroutine(carregarObjecto());
         }
 
     }
@@ -73,6 +67,17 @@ public class PlayerMovement : MonoBehaviour {
         {
             thisRender = other.gameObject.GetComponent<MeshRenderer>();
             thisRender.enabled = false;
+        }
+    }
+    IEnumerator carregarObjecto()
+    {
+        objectoCarregado.transform.position = pickupTarget.transform.position;
+       // objectoCarregado.GetComponent<CircleCollider2D>().enabled = false;
+        yield return new WaitForSecondsRealtime(0.5f);
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            isCarring = false;
+            //objectoCarregado.GetComponent<CircleCollider2D>().enabled = true;
         }
     }
 

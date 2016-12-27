@@ -12,8 +12,9 @@ public class VitoriaManager : MonoBehaviour
 
     SequenciaManager SM;
     Sequencia randomSequencia, sequenciaPosta;
-    List<GameObject> listaBolas;
-    bool largarNumeros = true, stopBlink = false;
+    List<GameObject> listaBolas;    //Para o spawn
+    bool stopBlink = false;
+    int bolasJogadas = 0;
 
     void Start()
     {
@@ -34,24 +35,36 @@ public class VitoriaManager : MonoBehaviour
         valorSequencia3.GetComponent<TextMesh>().text = "-";
         valorSequencia4.GetComponent<TextMesh>().text = "-";
         valorSequencia5.GetComponent<TextMesh>().text = randomSequencia.ListaNumerosSequencia[4].ToString();
+
+        largaNumeros();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (sequenciaPosta.ListaNumerosSequencia.Count == SM.numeroDeNumerosDasSequencias)
+
+    }
+
+    public void receberNumero(GameObject obj)
+    {
+        bolasJogadas++;
+        if(bolasJogadas == 1)
         {
-            Debug.Log("FULL");
-            largarNumeros = true;
+            valorSequencia1.GetComponent<TextMesh>().text = obj.GetComponentInChildren<TextMesh>().text;
+            stopBlink = true;
+            //stopBlink = false;
+            StartCoroutine(Blink(incremento));
         }
-        if (largarNumeros)
+        if(bolasJogadas == 2)
         {
-            largarNumeros = false;
-            listaBolas.Clear();
-            StartCoroutine(Blink(valorSequencia1));
-            StartCoroutine(SpawnBalls());
 
         }
+    }
+
+    private void largaNumeros()
+    {
+        listaBolas.Clear();
+        StartCoroutine(Blink(valorSequencia1));
+        StartCoroutine(SpawnBalls());
     }
     IEnumerator SpawnBalls()
     {
@@ -94,6 +107,8 @@ public class VitoriaManager : MonoBehaviour
     }
     IEnumerator Blink(GameObject texto)
     {
+        yield return new WaitForSecondsRealtime(1f);
+        stopBlink = false;
         while (true)
         {
             texto.GetComponent<TextMesh>().color = laranjaTexto;
