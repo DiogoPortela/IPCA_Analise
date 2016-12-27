@@ -14,7 +14,7 @@ public class VitoriaManager : MonoBehaviour
     Sequencia randomSequencia, sequenciaPosta;
     List<GameObject> listaBolas;    //Para o spawn
     bool stopBlink = false;
-    int bolasJogadas = 0;
+    int bolasJogadas = 0, victoria = 0;
 
     void Start()
     {
@@ -29,12 +29,7 @@ public class VitoriaManager : MonoBehaviour
         sequenciaPosta = new Sequencia(0);
         listaBolas = new List<GameObject>();
 
-        incremento.GetComponent<TextMesh>().text = "-";
-        valorSequencia1.GetComponent<TextMesh>().text = "-";
-        valorSequencia2.GetComponent<TextMesh>().text = "-";
-        valorSequencia3.GetComponent<TextMesh>().text = "-";
-        valorSequencia4.GetComponent<TextMesh>().text = "-";
-        valorSequencia5.GetComponent<TextMesh>().text = randomSequencia.ListaNumerosSequencia[4].ToString();
+
 
         largaNumeros();
     }
@@ -50,21 +45,62 @@ public class VitoriaManager : MonoBehaviour
         if(bolasJogadas == 1)
         {
             valorSequencia1.GetComponent<TextMesh>().text = obj.GetComponentInChildren<TextMesh>().text;
+            sequenciaPosta.ListaNumerosSequencia.Add(int.Parse(obj.GetComponentInChildren<TextMesh>().text));
             stopBlink = true;
             //stopBlink = false;
             StartCoroutine(Blink(incremento));
         }
         if(bolasJogadas == 2)
         {
+            incremento.GetComponent<TextMesh>().text = obj.GetComponentInChildren<TextMesh>().text;
+            sequenciaPosta.Incremento = int.Parse(obj.GetComponentInChildren<TextMesh>().text);
+            stopBlink = true;
 
+            for(int i = 1; i < SM.numeroDeNumerosDasSequencias; i++)
+            {
+                sequenciaPosta.ListaNumerosSequencia.Add(sequenciaPosta.ListaNumerosSequencia[0] + sequenciaPosta.Incremento * i);
+            }
+            StartCoroutine(mostrarNumeros());
+            bolasJogadas = 0;
         }
     }
 
     private void largaNumeros()
     {
+        incremento.GetComponent<TextMesh>().text = "-";
+        valorSequencia1.GetComponent<TextMesh>().text = "-";
+        valorSequencia2.GetComponent<TextMesh>().text = "-";
+        valorSequencia3.GetComponent<TextMesh>().text = "-";
+        valorSequencia4.GetComponent<TextMesh>().text = "-";
+        valorSequencia5.GetComponent<TextMesh>().text = randomSequencia.ListaNumerosSequencia[4].ToString();
+
+        GameObject[] listaBolasAux = GameObject.FindGameObjectsWithTag("Bola");
+        foreach(GameObject o in listaBolasAux)
+        {
+            Destroy(o);
+        }
+
         listaBolas.Clear();
         StartCoroutine(Blink(valorSequencia1));
         StartCoroutine(SpawnBalls());
+    }
+    IEnumerator mostrarNumeros()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        valorSequencia2.GetComponent<TextMesh>().text = sequenciaPosta.ListaNumerosSequencia[1].ToString();
+        yield return new WaitForSecondsRealtime(1f);
+        valorSequencia3.GetComponent<TextMesh>().text = sequenciaPosta.ListaNumerosSequencia[2].ToString();
+        yield return new WaitForSecondsRealtime(1f);
+        valorSequencia4.GetComponent<TextMesh>().text = sequenciaPosta.ListaNumerosSequencia[3].ToString();
+        yield return new WaitForSecondsRealtime(2f);
+        if(valorSequencia5.GetComponent<TextMesh>().text.Equals(sequenciaPosta.ListaNumerosSequencia[4].ToString()))
+        {
+            victoria++;
+        }
+        else
+        {
+            largaNumeros();
+        }
     }
     IEnumerator SpawnBalls()
     {
