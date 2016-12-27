@@ -12,6 +12,7 @@ public class VitoriaManager : MonoBehaviour
 
     SequenciaManager SM;
     Sequencia randomSequencia, sequenciaPosta;
+    List<GameObject> listaBolas;
     bool largarNumeros = true, stopBlink = false;
 
     void Start()
@@ -25,6 +26,7 @@ public class VitoriaManager : MonoBehaviour
         Debug.Log("Sequencia escolhida: " + randomSequencia.ListaNumerosSequencia[0] + " , " + randomSequencia.Incremento);
 
         sequenciaPosta = new Sequencia(0);
+        listaBolas = new List<GameObject>();
 
         incremento.GetComponent<TextMesh>().text = "-";
         valorSequencia1.GetComponent<TextMesh>().text = "-";
@@ -37,41 +39,63 @@ public class VitoriaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(sequenciaPosta.ListaNumerosSequencia.Count == SM.numeroDeNumerosDasSequencias)
+        if (sequenciaPosta.ListaNumerosSequencia.Count == SM.numeroDeNumerosDasSequencias)
         {
             Debug.Log("FULL");
             largarNumeros = true;
         }
-        if(largarNumeros)
+        if (largarNumeros)
         {
             largarNumeros = false;
+            listaBolas.Clear();
             StartCoroutine(Blink(valorSequencia1));
             StartCoroutine(SpawnBalls());
-            
+
         }
     }
     IEnumerator SpawnBalls()
     {
+        List<string> aux = new List<string>();
+
+        aux.Add(randomSequencia.ListaNumerosSequencia[0].ToString());
+        aux.Add(randomSequencia.Incremento.ToString());
+        for (int i = 0; i < numeroDeBolas - 2; i += 2)
+        {
+            string aux1, aux2;
+            aux1 = SM.numerosInicias[Random.Range(0, SM.numerosInicias.Length)].ToString();
+            aux2 = SM.incrementos[Random.Range(0, SM.incrementos.Length)].ToString();
+
+            aux.Add(aux1);
+            aux.Add(aux2);
+        }
+
+        for (int i = 0; i < aux.Count; i++)
+        {
+            string temp = aux[i];
+            int randomIndex = Random.Range(i, aux.Count);
+            aux[i] = aux[randomIndex];
+            aux[randomIndex] = temp;
+        }
+
+
         for (int i = 0; i < numeroDeBolas; i++)
-        {            
+        {
             if (i % 2 == 0)
             {
-                Instantiate(bolaPrefab, spawnPoint1.transform.position, new Quaternion(), bolasParent.transform);
-                Debug.Log("spawned on 1");
+                listaBolas.Add(Instantiate(bolaPrefab, spawnPoint1.transform.position, new Quaternion(), bolasParent.transform));
             }
             else
             {
-                Instantiate(bolaPrefab, spawnPoint2.transform.position, new Quaternion(), bolasParent.transform);
-                Debug.Log("spawned on 2");
+                listaBolas.Add(Instantiate(bolaPrefab, spawnPoint2.transform.position, new Quaternion(), bolasParent.transform));
             }
+            listaBolas[listaBolas.Count-1].GetComponentInChildren<TextMesh>().text = aux[i];
             yield return new WaitForSecondsRealtime(1f);
         }
     }
     IEnumerator Blink(GameObject texto)
     {
-        while(true)
+        while (true)
         {
-            Debug.Log("TESTE");
             texto.GetComponent<TextMesh>().color = laranjaTexto;
             yield return new WaitForSecondsRealtime(0.5f);
             texto.GetComponent<TextMesh>().color = azulTexto;
