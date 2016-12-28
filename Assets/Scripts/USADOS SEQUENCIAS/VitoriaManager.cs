@@ -32,9 +32,7 @@ public class VitoriaManager : MonoBehaviour
         largaNumeros();
     }
 
-    void Update()
-    {
-    }
+
 
     public void receberNumero(GameObject obj)
     {
