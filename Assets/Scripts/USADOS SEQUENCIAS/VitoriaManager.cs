@@ -92,7 +92,8 @@ public class VitoriaManager : MonoBehaviour
         {
             victoria++;
             do
-            {                
+            {
+                sequenciaRepetiu = false;
                 randomSequencia = SM.sequenciasArray[Random.Range(0, SM.numeroDeNumerosDasSequencias - 1)];
                 foreach (Sequencia s in sequenciasUsadas)
                 {
