@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-    public GameObject pickupTarget, objectoCarregado;   
+    public GameObject pickupTarget, carryTarget, objectoCarregado;   
     public int jumpForce, movementLimit, speed;
     public bool isCarring = false;
 
@@ -40,15 +40,19 @@ public class PlayerMovement : MonoBehaviour {
         {
             thisSpriteRenderer.flipX = true;
             pickupTarget.transform.localPosition = new Vector3(-Mathf.Abs(pickupTarget.transform.localPosition.x), pickupTarget.transform.localPosition.y, pickupTarget.transform.localPosition.z);
+            carryTarget.transform.localPosition = new Vector3(-Mathf.Abs(carryTarget.transform.localPosition.x), carryTarget.transform.localPosition.y, carryTarget.transform.localPosition.z);
+
         }
         if (thisRigidbody.velocity.x > 0 && horizontal > 0)
         {
             thisSpriteRenderer.flipX = false;
             pickupTarget.transform.localPosition = new Vector3(Mathf.Abs(pickupTarget.transform.localPosition.x), pickupTarget.transform.localPosition.y, pickupTarget.transform.localPosition.z);
+            carryTarget.transform.localPosition = new Vector3(Mathf.Abs(carryTarget.transform.localPosition.x), carryTarget.transform.localPosition.y, carryTarget.transform.localPosition.z);
+
         }
-        if(isCarring)
+        if (isCarring)
         {
-            objectoCarregado.transform.position = pickupTarget.transform.position;
+            objectoCarregado.transform.position = carryTarget.transform.position;
             StartCoroutine(carregarObjecto());
         }
 

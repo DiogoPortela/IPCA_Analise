@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VitoriaManager : MonoBehaviour
 {
-    public GameObject check1, check2, check3, incremento;
+    public GameObject check1, check2, check3, incremento, porta;
     public GameObject valorSequencia1, valorSequencia2, valorSequencia3, valorSequencia4, valorSequencia5;
     public GameObject bolaPrefab, spawnPoint1, spawnPoint2, bolasParent;
     public int numeroDeBolas = 6;
@@ -103,7 +103,7 @@ public class VitoriaManager : MonoBehaviour
                     break;
                 case 3:
                     check3.SetActive(true);
-                    //ABRIR PORTA
+                    porta.GetComponent<MudarNivel>().Vitoria = true;
                     break;
                 default:
                     break;

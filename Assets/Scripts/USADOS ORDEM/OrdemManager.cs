@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrdemManager : MonoBehaviour {
 
-    public GameObject spawn1, spawn2, spawn3, bolasParent, bolaPrefab, bolaGrandePrefab;
+    public GameObject spawn1, spawn2, spawn3, porta, bolasParent, bolaPrefab, bolaGrandePrefab;
     public GameObject check1, check2, check3;
     public int numeroMaximo;
     public int numeroMinimo;
@@ -100,7 +100,7 @@ public class OrdemManager : MonoBehaviour {
                     break;
                 case 3:
                     check3.SetActive(true);
-                    //ABRIR PORTA
+                    porta.GetComponent<MudarNivel>().Vitoria = true;
                     break;
                 default:
                     break;
