@@ -18,11 +18,12 @@ public class VitoriaManager : MonoBehaviour
 
     void Start()
     {
+        Random.InitState((int)System.DateTime.Now.Ticks);
         check1.SetActive(false);
         check2.SetActive(false);
         check3.SetActive(false);
         SM = this.gameObject.GetComponent<SequenciaManager>();
-        randomSequencia = SM.sequenciasArray[Random.Range(0, SM.numeroDeNumerosDasSequencias)];
+        randomSequencia = SM.sequenciasArray[Random.Range(0, SM.numeroDeNumerosDasSequencias-1)];
         Debug.Log("Sequencia escolhida: " + randomSequencia.ListaNumerosSequencia[0] + " , " + randomSequencia.Incremento);
 
         sequenciaPosta = new Sequencia(0);
@@ -33,7 +34,6 @@ public class VitoriaManager : MonoBehaviour
 
     void Update()
     {
-        Random.InitState((int)Time.time);
     }
 
     public void receberNumero(GameObject obj)

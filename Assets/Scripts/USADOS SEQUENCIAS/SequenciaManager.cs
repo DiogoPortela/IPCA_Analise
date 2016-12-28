@@ -55,7 +55,7 @@ public class SequenciaManager : MonoBehaviour
     void Awake()
     {
         sequenciasArray = new List<Sequencia>();
-        Random.InitState((int)Time.time);
+        Random.InitState((int)System.DateTime.Now.Ticks);
 
         for (int i = 0; i < numeroDeSequencias; i++)
         {
