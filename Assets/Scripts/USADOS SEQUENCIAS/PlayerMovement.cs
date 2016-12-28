@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         if(isCarring)
         {
+            objectoCarregado.transform.position = pickupTarget.transform.position;
             StartCoroutine(carregarObjecto());
         }
 
@@ -71,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
     }
     IEnumerator carregarObjecto()
     {
-        objectoCarregado.transform.position = pickupTarget.transform.position;
+        
        // objectoCarregado.GetComponent<CircleCollider2D>().enabled = false;
         yield return new WaitForSecondsRealtime(0.5f);
         if (Input.GetKeyUp(KeyCode.E))
