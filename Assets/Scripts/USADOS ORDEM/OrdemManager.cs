@@ -72,6 +72,9 @@ public class OrdemManager : MonoBehaviour {
             numerosOrdenados[i] = ultimoNumeroGerado;
             Debug.Log(ultimoNumeroGerado);
         }
+
+        System.Array.Reverse(numerosOrdenados);
+
         StartCoroutine(SpawnBalls());
     }
 
