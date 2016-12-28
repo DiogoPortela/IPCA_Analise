@@ -12,8 +12,9 @@ public class VitoriaManager : MonoBehaviour
 
     SequenciaManager SM;
     Sequencia randomSequencia, sequenciaPosta;
-    List<GameObject> listaBolas;    //Para o spawn
-    bool stopBlink = false;
+    List<Sequencia> sequenciasUsadas = new List<Sequencia>();
+    List<GameObject> listaBolas = new List<GameObject>();    //Para o spawn
+    bool stopBlink = false, sequenciaRepetiu;
     int bolasJogadas = 0, victoria = 0;
 
     void Start()
@@ -24,11 +25,10 @@ public class VitoriaManager : MonoBehaviour
         check3.SetActive(false);
         SM = this.gameObject.GetComponent<SequenciaManager>();
         randomSequencia = SM.sequenciasArray[Random.Range(0, SM.numeroDeNumerosDasSequencias-1)];
+        sequenciasUsadas.Add(randomSequencia);
         Debug.Log("Sequencia escolhida: " + randomSequencia.ListaNumerosSequencia[0] + " , " + randomSequencia.Incremento);
 
         sequenciaPosta = new Sequencia(0);
-        listaBolas = new List<GameObject>();
-
         largaNumeros();
     }
 
@@ -91,7 +91,19 @@ public class VitoriaManager : MonoBehaviour
         if (valorSequencia5.GetComponent<TextMesh>().text.Equals(sequenciaPosta.ListaNumerosSequencia[4].ToString()))
         {
             victoria++;
-            randomSequencia = SM.sequenciasArray[Random.Range(0, SM.numeroDeNumerosDasSequencias-1)];
+            do
+            {                
+                randomSequencia = SM.sequenciasArray[Random.Range(0, SM.numeroDeNumerosDasSequencias - 1)];
+                foreach (Sequencia s in sequenciasUsadas)
+                {
+                    if (randomSequencia == s)
+                    {
+                        sequenciaRepetiu = true;
+                    }
+                }
+            } while (sequenciaRepetiu);
+            sequenciasUsadas.Add(randomSequencia);            
+
             Debug.Log("Sequencia escolhida: " + randomSequencia.ListaNumerosSequencia[0] + " , " + randomSequencia.Incremento);
             switch (victoria)
             {
