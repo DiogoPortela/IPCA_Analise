@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
     public GameObject pickupTarget, carryTarget, objectoCarregado;   
-    public int jumpForce, movementLimit, speed;
-    public bool isCarring = false;
+    public int jumpForce, movementLimit, speed, linearDrag;
+    public bool isCarring = false, isFlying;
 
     Rigidbody2D thisRigidbody;
     SpriteRenderer thisSpriteRenderer;
@@ -20,21 +20,31 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
         horizontal = Input.GetAxis("Horizontal");
         jump = Input.GetAxis("Jump");
-        if (horizontal != 0 || jump != 0)
+        if (thisRigidbody.velocity.y == 0)
+        {
+            isFlying = false;
+        }
+        if (Mathf.Abs(horizontal) == 1 || jump == 1)
         {
             if (thisRigidbody.velocity.x < movementLimit && thisRigidbody.velocity.x > -movementLimit)
             {
                 Vector2 movement = new Vector2(horizontal * speed, 0);
                 thisRigidbody.AddForce(movement);
-                //thisRigidbody.position = new Vector2(thisRigidbody.position.x + horizontal * speed * Time.deltaTime, thisRigidbody.position.y);
-                //thisRigidbody.AddForce(new Vector2(horizontal * speed * Time.deltaTime, 0));
-                //thisRigidbody.AddForce(new Vector2(0, jump * jumpForce));
             }
             if(thisRigidbody.velocity.y < movementLimit)
             {
                 Vector2 movement = new Vector2(0, jump * jumpForce);
                 thisRigidbody.AddForce(movement);
             }
+            if(jump == 1)
+            {
+                isFlying = true;;
+            }
+            thisRigidbody.drag = 0;
+        }
+        else if(!isFlying)
+        {
+            thisRigidbody.drag = linearDrag;
         }
         if(thisRigidbody.velocity.x < 0 && horizontal < 0)
         {
@@ -50,7 +60,7 @@ public class PlayerMovement : MonoBehaviour {
             carryTarget.transform.localPosition = new Vector3(Mathf.Abs(carryTarget.transform.localPosition.x), carryTarget.transform.localPosition.y, carryTarget.transform.localPosition.z);
 
         }
-        if (isCarring)
+        if (isCarring && objectoCarregado != null)
         {
             objectoCarregado.transform.position = carryTarget.transform.position;
             StartCoroutine(carregarObjecto());
@@ -76,19 +86,34 @@ public class PlayerMovement : MonoBehaviour {
     }
     IEnumerator carregarObjecto()
     {
-        
        // objectoCarregado.GetComponent<CircleCollider2D>().enabled = false;
         yield return new WaitForSecondsRealtime(0.5f);
         if (Input.GetKeyUp(KeyCode.E))
         {
             isCarring = false;
+            objectoCarregado.GetComponent<Rigidbody2D>().isKinematic = false;
             //objectoCarregado.GetComponent<CircleCollider2D>().enabled = true;
         }
+    }
+    IEnumerator movimento()
+    {
+        if (thisRigidbody.velocity.x < movementLimit && thisRigidbody.velocity.x > -movementLimit)
+        {
+            Vector2 movement = new Vector2(horizontal * speed, 0);
+            thisRigidbody.AddForce(movement);
+        }
+        if (thisRigidbody.velocity.y < movementLimit)
+        {
+            Vector2 movement = new Vector2(0, jump * jumpForce);
+            thisRigidbody.AddForce(movement);
+        }
+        yield return new WaitForSecondsRealtime(0.5f);
     }
 
     public void receberObjecto(GameObject obj)
     {
         objectoCarregado = obj;
+        objectoCarregado.GetComponent<Rigidbody2D>().isKinematic = true;
         isCarring = true;
     }
 }
