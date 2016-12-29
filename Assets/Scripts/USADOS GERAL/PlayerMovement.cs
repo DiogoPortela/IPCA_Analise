@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour {
     {
        // objectoCarregado.GetComponent<CircleCollider2D>().enabled = false;
         yield return new WaitForSecondsRealtime(0.5f);
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.E) && objectoCarregado != null)
         {
             isCarring = false;
             objectoCarregado.GetComponent<Rigidbody2D>().isKinematic = false;

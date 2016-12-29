@@ -19,15 +19,15 @@ public class Texto : MonoBehaviour {
 	void Update () {
         if (progresse == 1)
         {
-            Wintotal.text = " “ Sim... és tu? Sim...sim... ” - murmurou a bruxa\n Ela entrega-te algo mestrioso";
+            Wintotal.text = " “ Sim... és tu? Sim...sim... ” - murmurou a bruxa\n Ela entrega-te algo mistrioso";
         }
         if (progresse == 2)
         {
-            Wintotal.text = " “ Sim... és tu? Sim...sim... ” - murmurou a bruxa\n Ela entrega-te algo mestrioso \n UM OVO DE DRAGÃO?";
+            Wintotal.text = " “ Sim... és tu? Sim...sim... ” - murmurou a bruxa\n Ela entrega-te algo mistrioso \n UM OVO DE DRAGÃO?";
         }
         if (progresse == 3)
         {
-            Wintotal.text = " “ Sim... és tu? Sim...sim... ” - murmurou a bruxa\n Ela entrega-te algo mestrioso \n UM OVO DE DRAGÃO?\n “o Ovo racha, sai um bebé dragão, Ele parece gostar de ti!”";
+            Wintotal.text = " “ Sim... és tu? Sim...sim... ” - murmurou a bruxa\n Ela entrega-te algo mistrioso \n UM OVO DE DRAGÃO?\n “o Ovo racha, sai um bebé dragão, Ele parece gostar de ti!”";
         }
         if (progresse == 4)
         {
