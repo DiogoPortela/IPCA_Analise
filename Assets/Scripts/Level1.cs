@@ -83,8 +83,8 @@ public class Level1 : MonoBehaviour {
         v21Por22 = (double)valor21 / (double)valor22;
 
         //Atribuir simbolo e inicializar a variável EscolheSimbolo
-        EscolheSimbolo = 1;
-        Simbolo.GetComponent<TextMesh>().text = "=";
+        //EscolheSimbolo = 1;
+        //Simbolo.GetComponent<TextMesh>().text = "=";
     }
     void Start () {
         wins = 0;
