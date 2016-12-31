@@ -76,23 +76,21 @@ public class PlayerMovement : MonoBehaviour {
             thisRender.enabled = true;
         }
     }
-    private void OnTriggerExit2D(Collider2D other)
+   /* private void OnTriggerExit2D(Collider2D other)
     {
         if(other.gameObject.tag == "Platform" && !other.gameObject.GetComponent<NumberReceptor>().isOn )
         {
             thisRender = other.gameObject.GetComponent<MeshRenderer>();
             thisRender.enabled = false;
         }
-    }
+    }*/
     IEnumerator carregarObjecto()
     {
-       // objectoCarregado.GetComponent<CircleCollider2D>().enabled = false;
         yield return new WaitForSecondsRealtime(0.5f);
         if (Input.GetKeyUp(KeyCode.E) && objectoCarregado != null)
         {
             isCarring = false;
             objectoCarregado.GetComponent<Rigidbody2D>().isKinematic = false;
-            //objectoCarregado.GetComponent<CircleCollider2D>().enabled = true;
         }
     }
     IEnumerator movimento()

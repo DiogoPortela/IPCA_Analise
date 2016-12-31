@@ -3,34 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Level5function : MonoBehaviour {
-    public int DMilhares;
-    public int Milhares;
-    public int Centenas;
-    public int Dezenas;
-    public int Unidades;
-    public int Finalnumber;
-    public int RandomCerta;
-    public int wins;
-    public int antiga;
-
-    public GameObject Resposta1;
-    public GameObject Resposta2;
-    public GameObject Resposta3;
-    public GameObject Resposta4;
-
-    public GameObject visto1;
-    public GameObject visto2;
-    public GameObject visto3;
-    public GameObject Porta;
-
-    //public GameObject Resposta1;
+public class ExtensoManager : MonoBehaviour {
+    public int DMilhares, Milhares, Centenas, Dezenas, Unidades, Finalnumber, RandomCerta;
+    public GameObject Resposta1, Resposta2, Resposta3, Resposta4;
+    public GameObject visto1, visto2, visto3, Porta;
     public GameObject Questao;
+
+    int wins, antiga;
+
     string SDMilhares;
     string SMilhares;
     string SCentenas;
     string SDezenas;
     string SUnidades;
+
+    void Start()
+    {
+        Random.InitState(System.DateTime.Now.Millisecond);
+        wins = 0;
+        comeco();
+    }
 
     public void atribuicomeco()
     {
@@ -76,7 +68,6 @@ public class Level5function : MonoBehaviour {
     public void comeco()
     {
         //Cria o número
-        Random.InitState(System.DateTime.Now.Millisecond);
         DMilhares = (int)Random.Range(2, 9) * 10000;
         Milhares = (int)Random.Range(1, 9) * 1000;
         Centenas = (int)Random.Range(1, 9) * 100;
@@ -249,12 +240,7 @@ public class Level5function : MonoBehaviour {
 
         Questao.GetComponent<TextMesh>().text = SDMilhares + SMilhares + SCentenas + SDezenas + SUnidades;    
    }
-    void Start() {
-        wins = 0;
-        comeco();
-    }
 	
-	// Update is called once per frame
 	void Update () {
         if (wins == 1)
         {
