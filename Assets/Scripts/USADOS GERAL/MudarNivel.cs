@@ -5,12 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class MudarNivel : MonoBehaviour
 {
+    public Sprite s;
     private bool vitoria;
     public bool Vitoria
     {
         get { return vitoria; }
         set { vitoria = value; }
     }
+
+    private void Update()
+    {
+        if(Vitoria)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = s;
+        }
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
