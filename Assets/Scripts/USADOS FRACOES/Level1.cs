@@ -26,11 +26,16 @@ public class Level1 : MonoBehaviour {
     public GameObject visto2;
     public GameObject visto3;
     public GameObject Porta;
+
+    bool isWaiting = false;
+
     public void Comeco() {
        
         visto1.GetComponent<Renderer>().enabled = false;
         visto2.GetComponent<Renderer>().enabled = false;
         visto3.GetComponent<Renderer>().enabled = false;
+        Simbolo.GetComponent<TextMesh>().text = "";
+
 
         Random.InitState(System.DateTime.Now.Millisecond);
         padraoJogo = Random.Range(1, 4);
@@ -95,9 +100,6 @@ public class Level1 : MonoBehaviour {
     void Update() {
 
         //função para Tocar o Simbolo De acordo com o incremento
-        if (EscolheSimbolo == 0) { Simbolo.GetComponent<TextMesh>().text = "<"; }
-        else if (EscolheSimbolo == 1) { Simbolo.GetComponent<TextMesh>().text = "="; }
-        else if (EscolheSimbolo == 2) { Simbolo.GetComponent<TextMesh>().text = ">"; }
         //função para retornar o valor do EscolheSimbolo
 
         if (wins == 1)
@@ -122,29 +124,36 @@ public class Level1 : MonoBehaviour {
         }
     }
     
-
     //Colisão player para trocar
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Maior")
+        if (!isWaiting)
         {
-            EscolheSimbolo = 2;
-        }
-        else if (other.gameObject.tag == "Igual")
-        {
-            EscolheSimbolo = 1;
-        }
-       else if (other.gameObject.tag == "Menor")
-        {
-            EscolheSimbolo = 0;
+            if (other.gameObject.tag == "Maior")
+            {
+                EscolheSimbolo = 2;
+                Simbolo.GetComponent<TextMesh>().text = ">";
+            }
+            else if (other.gameObject.tag == "Igual")
+            {
+                EscolheSimbolo = 1;
+                Simbolo.GetComponent<TextMesh>().text = "=";
+            }
+            else if (other.gameObject.tag == "Menor")
+            {
+                EscolheSimbolo = 0;
+                Simbolo.GetComponent<TextMesh>().text = "<";
+            }
+
+            if (other.gameObject.tag == "Maior" || other.gameObject.tag == "Igual" || other.gameObject.tag == "Menor")
+            {
+                if (EscolheSimbolo == 1 && v11Por12 == v21Por22) { wins++; StartCoroutine(WaitForBeginning()); }
+                else if (EscolheSimbolo == 0 && v11Por12 < v21Por22) { wins++; StartCoroutine(WaitForBeginning()); }
+                else if (EscolheSimbolo == 2 && v11Por12 > v21Por22) { wins++; StartCoroutine(WaitForBeginning()); }
+            }
         }
         //Colisão player para Ganhar
-        if (other.gameObject.tag == "Maior"|| other.gameObject.tag == "Igual"|| other.gameObject.tag == "Menor")
-        {
-            if (EscolheSimbolo == 1 && v11Por12 == v21Por22) { wins++; Comeco(); }
-            else if (EscolheSimbolo == 0 && v11Por12 < v21Por22) { wins++;Comeco(); }
-            else if (EscolheSimbolo == 2 && v11Por12 > v21Por22) { wins++; Comeco(); }
-        }
+       
         if (wins == 3)
         {
             vstring11.GetComponent<Renderer>().enabled = false;
@@ -155,7 +164,16 @@ public class Level1 : MonoBehaviour {
             Porta.GetComponent<MudarNivel>().Vitoria = true;
         }
     }
-} 
-   
+    IEnumerator WaitForBeginning()
+    {
+        isWaiting = true;
+        yield return new WaitForSecondsRealtime(5f);
+        isWaiting = false;
+        Comeco();
+    }
+
+
+}
+
 
 
